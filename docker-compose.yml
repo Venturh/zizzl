@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: 'postgres'
+    image: 'postgres:13'
+    ports:
+      - '15432:5432'
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - 'pgdata:/var/lib/postgresql/data/'
+
+  #   studio:
+  #     build:
+  #       context: .
+  #       dockerfile: Dockerfile.studio
+  #     depends_on:
+  #       - postgres
+  #     env_file:
+  #       - .env
+  #     ports:
+  #       - '5555:5555'
+  #     tty: true
+  #     labels:
+  #       - 'traefik.http.routers.backend.rule=Host(`prisma.localhost`)'
+
+  #   compiler:
+  #     container_name: 'codegen'
+  #     image: node:14
+  #     command: yarn codegen  --watch
+  #     volumes:
+  #       - .:/srv/compiler:rw
+  #     working_dir: /srv/compiler
+  #     depends_on:
+  #       - next
+
+  next:
+    container_name: 'zizzl'
+    image: node:14
+    command: npm run next
+    ports:
+      - '1337:1337'
+    volumes:
+      - .:/srv/next:rw
+    working_dir: /srv/next
+    env_file:
+      - .env.local
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata: {}
