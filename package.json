@@ -1,22 +1,35 @@
 {
-  "name": "zizzl",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "next": "11.0.1",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
-  },
-  "devDependencies": {
-    "@types/react": "17.0.14",
-    "eslint": "7.31.0",
-    "eslint-config-next": "11.0.1",
-    "typescript": "4.3.5"
-  }
+	"name": "zizzl",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev -p 1337",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"next": "11.0.1",
+		"next-themes": "^0.0.15",
+		"react": "17.0.2",
+		"react-dom": "17.0.2"
+	},
+	"devDependencies": {
+		"@tailwindcss/forms": "^0.3.3",
+		"@tailwindcss/typography": "^0.4.1",
+		"@types/react": "17.0.14",
+		"autoprefixer": "^10.3.1",
+		"eslint": "7.31.0",
+		"eslint-config-next": "11.0.1",
+		"postcss": "^8.3.6",
+		"tailwindcss": "^2.2.6",
+		"typescript": "4.3.5"
+	},
+	"prettier": {
+		"semi": true,
+		"useTabs": true,
+		"tabWidth": 2,
+		"trailingComma": "all",
+		"singleQuote": true
+	}
 }
