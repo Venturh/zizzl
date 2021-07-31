@@ -1,0 +1,10 @@
+query me {
+	me {
+		name
+		image
+	}
+}
+
+mutation editUser($name: String, $image: String) {
+	editUser(name: $name, image: $image)
+}

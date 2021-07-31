@@ -10,25 +10,38 @@
 		"vercel-build": "prisma migrate --preview-feature deploy && next build",
 		"prisma generate": "prisma generate",
 		"prisma:docker": "docker-compose run --publish 5555:5555 next npx prisma",
-		"lint": "next lint"
+		"gen": "graphql-codegen  --config codegen.yml",
+		"gen:schema": "ts-node --transpile-only -P nexus.tsconfig.json -r tsconfig-paths/register schema",
+		"lint": "next lint",
+		"postinstall": "prisma generate"
 	},
 	"dependencies": {
+		"@apollo/client": "^3.4.1",
 		"@headlessui/react": "^1.4.0",
 		"@heroicons/react": "^1.0.3",
 		"@hookform/resolvers": "^2.6.1",
 		"@next-auth/prisma-adapter": "^0.5.3",
 		"@prisma/client": "^2.27.0",
+		"apollo-server-micro": "^2.24.0",
 		"clsx": "^1.1.1",
+		"graphql": "^15.5.1",
 		"next": "11.0.1",
 		"next-auth": "^3.27.3",
 		"next-seo": "^4.26.0",
 		"next-themes": "^0.0.15",
+		"nexus": "1.1.0",
+		"nexus-prisma": "^0.30.0",
 		"react": "17.0.2",
 		"react-dom": "17.0.2",
 		"react-hook-form": "^7.12.1",
 		"yup": "^0.32.9"
 	},
 	"devDependencies": {
+		"@graphql-codegen/cli": "^1.21.4",
+		"@graphql-codegen/near-operation-file-preset": "^1.18.0",
+		"@graphql-codegen/typescript": "^1.22.0",
+		"@graphql-codegen/typescript-operations": "^1.17.16",
+		"@graphql-codegen/typescript-react-apollo": "^2.2.4",
 		"@tailwindcss/forms": "^0.3.3",
 		"@tailwindcss/typography": "^0.4.1",
 		"@types/node": "15.12.2",
@@ -39,6 +52,8 @@
 		"postcss": "^8.3.6",
 		"prisma": "^2.27.0",
 		"tailwindcss": "^2.2.6",
+		"ts-node": "^10.1.0",
+		"tsconfig-paths": "^3.10.1",
 		"typescript": "4.3.5"
 	},
 	"prettier": {
@@ -47,8 +62,5 @@
 		"tabWidth": 2,
 		"trailingComma": "all",
 		"singleQuote": true
-	},
-	"engines": {
-		"node": ">=14"
 	}
 }
