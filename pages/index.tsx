@@ -1,21 +1,18 @@
-import { signIn, signOut, useSession } from 'next-auth/client';
-export default function Home() {
-	const [session, loading] = useSession();
+import { GetServerSideProps } from 'next';
+import LandingLayout from 'components/layouts/LandingLayout';
 
+const Landing = () => {
+	const title = 'Landing Page';
+	const description = 'Welcome.';
 	return (
-		<>
-			{!session && (
-				<>
-					Not signed in <br />
-					<button onClick={() => signIn()}>Sign in</button>
-				</>
-			)}
-			{session && (
-				<>
-					Signed in as {session.user?.name} <br />
-					<button onClick={() => signOut()}>Sign out</button>
-				</>
-			)}
-		</>
+		<LandingLayout title={title} description={description}>
+			Welcome
+		</LandingLayout>
 	);
-}
+};
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+	return { props: {} };
+};
+
+export default Landing;

@@ -1,13 +1,11 @@
 import NextAuth, { User as NextAuthUser } from 'next-auth';
 import Providers from 'next-auth/providers';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { PrismaClient } from '@prisma/client';
+import prisma from 'lib/prisma';
 
 interface NextAuthUserWithStringId extends NextAuthUser {
 	id: string;
 }
-
-const prisma = new PrismaClient();
 
 export default NextAuth({
 	// https://next-auth.js.org/configuration/providers
@@ -25,6 +23,36 @@ export default NextAuth({
 					image: profile.avatar_url,
 				} as NextAuthUserWithStringId;
 			},
+		}),
+		Providers.Discord({
+			clientId: process.env.DISCORD_CLIENT_ID,
+			clientSecret: process.env.DISCORD_CLIENT_SECRET,
+		}),
+		Providers.Email({
+			server: {
+				host: 'smtp.sendgrid.net',
+				port: '587',
+				auth: {
+					user: 'apikey',
+					pass: process.env.EMAIL_API_KEY,
+				},
+			},
+			from: process.env.EMAIL_FROM,
+			// sendVerificationRequest: ({
+			// 	identifier: email,
+			// 	url,
+			// 	token,
+			// 	baseUrl,
+			// 	provider,
+			// }) => {
+			// 	console.log(
+			// 		'🚀 ~ file: [...nextauth].ts ~ line 43 ~ identifier',
+			// 		email,
+			// 		url,
+			// 		token,
+			// 		provider,
+			// 	);
+			// },
 		}),
 	],
 	// Database optional. MySQL, Maria DB, Postgres and MongoDB are supported.
@@ -75,7 +103,7 @@ export default NextAuth({
 	// pages is not specified for that route.
 	// https://next-auth.js.org/configuration/pages
 	pages: {
-		// signIn: '/auth/signin',  // Displays signin buttons
+		signIn: '/auth/login', // Displays signin buttons
 		// signOut: '/auth/signout', // Displays form with sign out button
 		// error: '/auth/error', // Error code passed in query string as ?error=
 		// verifyRequest: '/auth/verify-request', // Used for check email page
@@ -97,7 +125,18 @@ export default NextAuth({
 
 	// Events are useful for logging
 	// https://next-auth.js.org/configuration/events
-	events: {},
+	events: {
+		createUser: async (user: any) => {
+			if (user.image === null) {
+				await prisma.user.update({
+					where: { id: user.id },
+					data: {
+						image: `https://api.multiavatar.com/${user.name ?? user.email}.png`,
+					},
+				});
+			}
+		},
+	},
 
 	// Enable debug messages in the console if you are having problems
 	debug: false,
