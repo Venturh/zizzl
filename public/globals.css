@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-	@apply text-primary bg-primary min-h-screen;
-}
-
 .dark {
 	--brand: #93c5fd;
 	--brand-darker: #60a5fa;

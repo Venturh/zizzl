@@ -47,11 +47,8 @@ export default function Navigation() {
 								</Disclosure.Button>
 							</div>
 							<div className="flex items-center flex-1 px-2 sm:items-stretch sm:justify-between">
-								<Link
-									to="/"
-									className="text-2xl font-black bg-gradient-to-r from-brand via-brand to-error bg-clip-text text-tansparent"
-								>
-									mizzle
+								<Link to="/" className="text-2xl text-brand">
+									zizzl
 								</Link>
 								<div className="items-center hidden space-x-4 sm:flex">
 									<NavItems />

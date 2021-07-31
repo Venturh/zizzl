@@ -17,6 +17,7 @@ interface Props<T extends FieldValues>
 	error?: ErrorProps;
 	form: UseFormReturn<T>;
 	onSubmit?: SubmitHandler<T>;
+	buttonText?: string;
 }
 
 export default function Form<T extends FieldValues>({
@@ -25,6 +26,7 @@ export default function Form<T extends FieldValues>({
 	onSubmit,
 	children,
 	error,
+	buttonText,
 	...rest
 }: Props<T>) {
 	const { isSubmitting } = form.formState;
@@ -42,7 +44,7 @@ export default function Form<T extends FieldValues>({
 						{children}
 					</fieldset>
 					<Button className="mt-4" type="submit" loading={isSubmitting}>
-						{name}
+						{buttonText}
 					</Button>
 				</form>
 			</FormProvider>

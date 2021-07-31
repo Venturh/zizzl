@@ -42,6 +42,17 @@ export type User = {
   name?: Maybe<Scalars['String']>;
 };
 
+export type EditUserMutationVariables = Exact<{
+  name?: Maybe<Scalars['String']>;
+  image?: Maybe<Scalars['String']>;
+}>;
+
+
+export type EditUserMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'editUser'>
+);
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -49,15 +60,48 @@ export type MeQuery = (
   { __typename?: 'Query' }
   & { me?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'name' | 'image'>
+    & Pick<User, 'name' | 'email' | 'image'>
   )> }
 );
 
 
+export const EditUserDocument = gql`
+    mutation editUser($name: String, $image: String) {
+  editUser(name: $name, image: $image)
+}
+    `;
+export type EditUserMutationFn = Apollo.MutationFunction<EditUserMutation, EditUserMutationVariables>;
+
+/**
+ * __useEditUserMutation__
+ *
+ * To run a mutation, you first call `useEditUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEditUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [editUserMutation, { data, loading, error }] = useEditUserMutation({
+ *   variables: {
+ *      name: // value for 'name'
+ *      image: // value for 'image'
+ *   },
+ * });
+ */
+export function useEditUserMutation(baseOptions?: Apollo.MutationHookOptions<EditUserMutation, EditUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<EditUserMutation, EditUserMutationVariables>(EditUserDocument, options);
+      }
+export type EditUserMutationHookResult = ReturnType<typeof useEditUserMutation>;
+export type EditUserMutationResult = Apollo.MutationResult<EditUserMutation>;
+export type EditUserMutationOptions = Apollo.BaseMutationOptions<EditUserMutation, EditUserMutationVariables>;
 export const MeDocument = gql`
     query me {
   me {
     name
+    email
     image
   }
 }

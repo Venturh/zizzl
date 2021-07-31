@@ -1,5 +1,7 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import { getSession, getCsrfToken } from 'next-auth/client';
+import { QueryOptions } from '@apollo/client';
+import { preloadQuery } from 'lib/apollo';
 
 export async function unauthenticatedRoute(
 	ctx: GetServerSidePropsContext,
@@ -40,4 +42,19 @@ export async function authenticatedRoute(
 	return {
 		props: { session },
 	};
+}
+
+export async function preloadAuthenticatedRoute(
+	ctx: GetServerSidePropsContext,
+	queryOption: QueryOptions,
+): Promise<GetServerSidePropsResult<{}>> {
+	const session = await getSession(ctx);
+
+	if (!session) {
+		return {
+			notFound: true,
+		};
+	}
+
+	return preloadQuery(queryOption);
 }

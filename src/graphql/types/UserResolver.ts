@@ -1,7 +1,6 @@
 import { extendType, nullable, objectType, stringArg } from 'nexus';
 import { User } from 'nexus-prisma';
 
-import prisma from 'lib/prisma';
 import { ResultType } from './ResultResolver';
 
 export const user = objectType({
@@ -36,12 +35,12 @@ export const userMutations = extendType({
 				name: nullable(stringArg()),
 				image: nullable(stringArg()),
 			},
-			resolve: async (_root, { name, image }, { user }) => {
+			resolve: async (_root, { name, image }, { user, prisma }) => {
 				await prisma.user.update({
 					where: { id: user!.id },
 					data: {
-						name,
-						image,
+						name: name ?? undefined,
+						image: image ?? undefined,
 					},
 				});
 				return ResultType.SUCCESS;

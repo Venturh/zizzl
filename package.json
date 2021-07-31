@@ -11,7 +11,7 @@
 		"prisma generate": "prisma generate",
 		"prisma:docker": "docker-compose run --publish 5555:5555 next npx prisma",
 		"gen": "graphql-codegen  --config codegen.yml",
-		"gen:schema": "ts-node --transpile-only -P nexus.tsconfig.json -r tsconfig-paths/register schema",
+		"gen:schema": "ts-node --transpile-only -P nexus.tsconfig.json -r tsconfig-paths/register ./src/graphql/schema.ts",
 		"lint": "next lint",
 		"postinstall": "prisma generate"
 	},

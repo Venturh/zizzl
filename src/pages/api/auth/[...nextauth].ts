@@ -55,6 +55,14 @@ export default NextAuth({
 			console.log('redirect', url, baseUrl);
 			return baseUrl;
 		},
+		async session(session, userOrToken) {
+			if (session?.user) {
+				session.user = Object.assign({}, session.user, {
+					id: userOrToken.id || session.user.id,
+				});
+			}
+			return session;
+		},
 	},
 
 	events: {

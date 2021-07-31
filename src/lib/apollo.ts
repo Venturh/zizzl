@@ -2,11 +2,13 @@ import { useMemo } from 'react';
 import { GetServerSidePropsResult } from 'next';
 import {
 	ApolloClient,
+	from,
 	HttpLink,
 	InMemoryCache,
 	NormalizedCacheObject,
 	QueryOptions,
 } from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | null = null;
 
@@ -17,10 +19,20 @@ export function createApolloClient() {
 		uri: process.env.NEXT_PUBLIC_HOST,
 	});
 
+	const errorLink = onError(({ graphQLErrors, networkError }) => {
+		if (graphQLErrors)
+			graphQLErrors.map(({ message, locations, path }) => {
+				console.log(
+					`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+				);
+			});
+		if (networkError) console.log(`[Network error]: ${networkError}`);
+	});
+
 	return new ApolloClient({
 		ssrMode: typeof window === 'undefined',
 		credentials: 'include',
-		link: httpLink,
+		link: from([errorLink, httpLink]),
 		cache: new InMemoryCache(),
 	});
 }
