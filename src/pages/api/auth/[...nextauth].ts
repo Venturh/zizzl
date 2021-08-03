@@ -70,7 +70,9 @@ export default NextAuth({
 			if (user.image === null) {
 				await prisma.user.update({
 					where: { id: user.id },
-					data: {},
+					data: {
+						image: `https://api.multiavatar.com/${user.name ?? user.email}.png`,
+					},
 				});
 			}
 		},

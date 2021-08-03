@@ -34,7 +34,8 @@ function Login({
 						<h2 className="text-2xl text-secondary">{description}</h2>
 					</div>
 					<Form
-						name="Login"
+						name="login"
+						buttonText="Login"
 						form={form}
 						method="post"
 						action="/api/auth/signin/email"
