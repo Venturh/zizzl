@@ -7,7 +7,6 @@
 		"next": "next dev -p 1337",
 		"start": "next start",
         "build": "next build",
-		"vercel-build": "prisma migrate --preview-feature deploy && next build",
 		"gen": "graphql-codegen  --config codegen.yml",
 		"gen:schema": "ts-node --transpile-only -P nexus.tsconfig.json -r tsconfig-paths/register ./src/graphql/schema.ts",
 		"lint": "npx eslint --ext .ts,.js,.tsx ./src",
