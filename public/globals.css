@@ -2,30 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+	@apply min-h-screen antialiased text-primary bg-primary;
+}
+
+::-webkit-scrollbar {
+	display: none;
+}
+
 .dark {
-	--brand: #93c5fd;
-	--brand-darker: #60a5fa;
-	--brand-lighter: #bfdbfe;
-	--brand-contrast: #08090a;
-	--bg-primary: #18181b;
-	--bg-secondary: #1e1e21;
-	--accent: #29292c;
-	--text-primary: #f9fafb;
-	--text-secondary: #e5e7eb;
-	--error: #f87171;
-	--success: #4ade80;
+	--text-primary: 255, 255, 255;
+	--text-secondary: 229, 231, 235;
+	--bg-primary: 24, 24, 27;
+	--bg-secondary: 30, 30, 33;
+	--accent-primary: 41, 41, 44;
+	--accent-secondary: 37, 37, 40;
+	--brand-primary: 125, 211, 252;
+	--brand-secondary: 56, 189, 248;
+	--success-primary: 110, 231, 183;
+	--success-secondary: 52, 211, 153;
+	--error-primary: 253, 164, 175;
+	--error-secondary: 251, 113, 133;
+	--warning-primary: 252, 211, 77;
+	--warning-secondary: 251, 191, 36;
 }
 
 .light {
-	--brand: #60a5fa;
-	--brand-darker: #3b82f6;
-	--brand-lighter: #93c5fd;
-	--brand-contrast: #1b2439;
-	--bg-primary: #fafafa;
-	--bg-secondary: #f4f4f5;
-	--accent: #e4e4e7;
-	--text-primary: #111827;
-	--text-secondary: #4b5563;
-	--error: #ef4444;
-	--success: #22c55e;
+	--text-primary: 17, 24, 39;
+	--text-secondary: 75, 85, 99;
+	--bg-primary: 248, 250, 252;
+	--bg-secondary: 241, 245, 249;
+	--accent-primary: 243, 244, 246;
+	--accent-secondary: 244, 245, 248;
+	--brand-primary: 2, 132, 199;
+	--brand-secondary: 3, 105, 161;
+	--success-primary: 16, 185, 129;
+	--success-secondary: 5, 150, 105;
+	--error-primary: 244, 63, 94;
+	--error-secondary: 225, 29, 72;
+	--warning-primary: 245, 158, 11;
+	--warning-secondary: 217, 119, 6;
 }
