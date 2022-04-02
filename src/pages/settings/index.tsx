@@ -3,15 +3,14 @@ import { useRouter } from 'next/router';
 import { object, string } from 'yup';
 
 import Form from 'components/Form';
-import FormInput from 'components/Input';
-import { AppLayout } from 'components/layouts/AppLayout';
+import FormInput from 'components/ui/Input';
+import AppLayout from 'components/layouts/AppLayout';
 import { ThemeSwitch } from 'components/ThemeToggle';
 
-import { useFormValidation } from 'utils/form';
+import { useFormValidation } from 'hooks/useForm';
 import { preloadQuery } from 'lib/apollo';
 
 import { MeDocument, useEditUserMutation, useMeQuery } from 'types/graphql';
-import BlockContainer from 'components/BlockContainer';
 
 const imageRegex =
 	'^https?://(www.|)((a|p)bs.twimg.com/(profile_images|sticky/default_profile_images)/(.*).(jpg|png|jpeg|webp)|avatars.githubusercontent.com/u/[^s]+|github.com/identicons/[^s]+|cdn.discordapp.com/avatars/[^s]+/[^s]+.(jpg|png|jpeg|webp)|api.multiavatar.com)';
@@ -25,15 +24,15 @@ export default function Account() {
 	const { push } = useRouter();
 	const { data: user } = useMeQuery();
 	const [submit, { error }] = useEditUserMutation({
-		onCompleted: () => push('/app'),
+		onCompleted: () => push('/dashboard'),
 	});
 
 	const form = useFormValidation({
 		schema: editAccountSchema,
 	});
 	return (
-		<AppLayout>
-			<BlockContainer title="Settings">
+		<AppLayout title="Settings">
+			<div className="flex flex-col w-full max-w-md p-3 mx-auto space-y-3 rounded-md shadow-sm dark:shadow-none bg-secondary ring ring-accent-primary">
 				<div className="space-y-4">
 					<h2 className="text-xl font-medium">General</h2>
 					<ThemeSwitch />
@@ -43,9 +42,7 @@ export default function Account() {
 					<Form
 						buttonText="Save"
 						form={form}
-						onSubmit={({ name, image }) =>
-							submit({ variables: { name, image } })
-						}
+						onSubmit={({ name, image }) => submit({ variables: { name, image } })}
 						error={{ title: 'An error occurred', error }}
 					>
 						<div className="space-y-6">
@@ -66,10 +63,10 @@ export default function Account() {
 						</div>
 					</Form>
 				</div>
-			</BlockContainer>
+			</div>
 		</AppLayout>
 	);
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) =>
-	preloadQuery({ query: MeDocument });
+	preloadQuery(ctx, { query: MeDocument });

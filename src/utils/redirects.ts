@@ -5,7 +5,7 @@ import { preloadQuery } from 'lib/apollo';
 
 export async function unauthenticatedRoute(
 	ctx: GetServerSidePropsContext,
-	redirect: string = '/app',
+	redirect: string = '/portfolio',
 ) {
 	const session = await getSession(ctx);
 	const csrfToken = await getCsrfToken(ctx);
@@ -47,14 +47,18 @@ export async function authenticatedRoute(
 export async function preloadAuthenticatedRoute(
 	ctx: GetServerSidePropsContext,
 	queryOption: QueryOptions,
+	props?: any,
 ): Promise<GetServerSidePropsResult<{}>> {
 	const session = await getSession(ctx);
 
 	if (!session) {
 		return {
-			notFound: true,
+			redirect: {
+				destination: '/auth/login',
+				permanent: false,
+			},
 		};
 	}
 
-	return preloadQuery(queryOption);
+	return preloadQuery(ctx, queryOption, props);
 }

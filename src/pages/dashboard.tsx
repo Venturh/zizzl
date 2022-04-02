@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import { AppLayout } from 'components/layouts/AppLayout';
+import AppLayout from 'components/layouts/AppLayout';
 import { MeDocument, useMeQuery } from 'types/graphql';
 import { preloadAuthenticatedRoute } from 'utils/redirects';
 
@@ -7,7 +7,7 @@ function App() {
 	const { data } = useMeQuery();
 
 	return (
-		<AppLayout>
+		<AppLayout title="Dashboard">
 			<span>Welcome {data?.me?.name}</span>
 		</AppLayout>
 	);

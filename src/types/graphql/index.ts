@@ -4,73 +4,65 @@ export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions =  {}
+const defaultOptions = {};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
+	ID: string;
+	String: string;
+	Boolean: boolean;
+	Int: number;
+	Float: number;
 };
 
 export type Mutation = {
-  __typename?: 'Mutation';
-  editUser?: Maybe<Result>;
+	__typename?: 'Mutation';
+	editUser?: Maybe<Result>;
 };
 
-
 export type MutationEditUserArgs = {
-  image?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
+	image?: Maybe<Scalars['String']>;
+	name?: Maybe<Scalars['String']>;
 };
 
 export type Query = {
-  __typename?: 'Query';
-  me?: Maybe<User>;
+	__typename?: 'Query';
+	me?: Maybe<User>;
 };
 
 export enum Result {
-  Success = 'SUCCESS'
+	Success = 'SUCCESS',
 }
 
 export type User = {
-  __typename?: 'User';
-  email?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  image?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
+	__typename?: 'User';
+	email?: Maybe<Scalars['String']>;
+	id: Scalars['ID'];
+	image?: Maybe<Scalars['String']>;
+	name?: Maybe<Scalars['String']>;
 };
 
 export type EditUserMutationVariables = Exact<{
-  name?: Maybe<Scalars['String']>;
-  image?: Maybe<Scalars['String']>;
+	name?: Maybe<Scalars['String']>;
+	image?: Maybe<Scalars['String']>;
 }>;
 
+export type EditUserMutation = { __typename?: 'Mutation' } & Pick<Mutation, 'editUser'>;
 
-export type EditUserMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'editUser'>
-);
+export type MeQueryVariables = Exact<{ [key: string]: never }>;
 
-export type MeQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type MeQuery = (
-  { __typename?: 'Query' }
-  & { me?: Maybe<(
-    { __typename?: 'User' }
-    & Pick<User, 'name' | 'email' | 'image'>
-  )> }
-);
-
+export type MeQuery = { __typename?: 'Query' } & {
+	me?: Maybe<{ __typename?: 'User' } & Pick<User, 'name' | 'email' | 'image'>>;
+};
 
 export const EditUserDocument = gql`
-    mutation editUser($name: String, $image: String) {
-  editUser(name: $name, image: $image)
-}
-    `;
-export type EditUserMutationFn = Apollo.MutationFunction<EditUserMutation, EditUserMutationVariables>;
+	mutation editUser($name: String, $image: String) {
+		editUser(name: $name, image: $image)
+	}
+`;
+export type EditUserMutationFn = Apollo.MutationFunction<
+	EditUserMutation,
+	EditUserMutationVariables
+>;
 
 /**
  * __useEditUserMutation__
@@ -90,22 +82,27 @@ export type EditUserMutationFn = Apollo.MutationFunction<EditUserMutation, EditU
  *   },
  * });
  */
-export function useEditUserMutation(baseOptions?: Apollo.MutationHookOptions<EditUserMutation, EditUserMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<EditUserMutation, EditUserMutationVariables>(EditUserDocument, options);
-      }
+export function useEditUserMutation(
+	baseOptions?: Apollo.MutationHookOptions<EditUserMutation, EditUserMutationVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useMutation<EditUserMutation, EditUserMutationVariables>(EditUserDocument, options);
+}
 export type EditUserMutationHookResult = ReturnType<typeof useEditUserMutation>;
 export type EditUserMutationResult = Apollo.MutationResult<EditUserMutation>;
-export type EditUserMutationOptions = Apollo.BaseMutationOptions<EditUserMutation, EditUserMutationVariables>;
+export type EditUserMutationOptions = Apollo.BaseMutationOptions<
+	EditUserMutation,
+	EditUserMutationVariables
+>;
 export const MeDocument = gql`
-    query me {
-  me {
-    name
-    email
-    image
-  }
-}
-    `;
+	query me {
+		me {
+			name
+			email
+			image
+		}
+	}
+`;
 
 /**
  * __useMeQuery__
@@ -123,13 +120,15 @@ export const MeDocument = gql`
  * });
  */
 export function useMeQuery(baseOptions?: Apollo.QueryHookOptions<MeQuery, MeQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MeQuery, MeQueryVariables>(MeDocument, options);
-      }
-export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery, MeQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MeQuery, MeQueryVariables>(MeDocument, options);
-        }
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useQuery<MeQuery, MeQueryVariables>(MeDocument, options);
+}
+export function useMeLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<MeQuery, MeQueryVariables>,
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useLazyQuery<MeQuery, MeQueryVariables>(MeDocument, options);
+}
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;

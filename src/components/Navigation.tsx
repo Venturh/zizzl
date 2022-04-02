@@ -5,9 +5,9 @@ import { useSession, signout } from 'next-auth/client';
 import { Disclosure } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 
-import Link from './Link';
-import ThemeToggle, { ThemeSwitch } from './ThemeToggle';
-import Dropdown from './Dropdown';
+import Link from './ui/Link';
+import { ThemeSwitch } from './ThemeToggle';
+import Dropdown from './ui/Menu';
 
 export default function Navigation() {
 	const [session, loading] = useSession();
@@ -23,17 +23,10 @@ export default function Navigation() {
 					<div className="max-w-sm mx-auto sm:max-w-6xl">
 						<div className="relative flex items-center justify-between h-16">
 							<div className="absolute inset-y-0 right-0 flex items-center space-x-1 sm:hidden">
-								<Dropdown
-									additionalItem={<ThemeSwitch />}
-									menuItems={dropdownItems}
-								>
+								<Dropdown additionalItem={<ThemeSwitch />} menuItems={dropdownItems}>
 									<div className="flex  space-x-0.5">
 										{session?.user?.image && (
-											<img
-												className="w-6 rounded-full"
-												src={session?.user!.image}
-												alt="userImg"
-											/>
+											<img className="w-6 rounded-full" src={session?.user!.image} alt="userImg" />
 										)}
 									</div>
 								</Dropdown>
@@ -47,15 +40,12 @@ export default function Navigation() {
 								</Disclosure.Button>
 							</div>
 							<div className="flex items-center flex-1 px-2 sm:items-stretch sm:justify-between">
-								<Link to="/" className="text-2xl text-brand">
+								<Link href="/" className="text-2xl text-brand">
 									zizzl
 								</Link>
 								<div className="items-center hidden space-x-4 sm:flex">
 									<NavItems />
-									<Dropdown
-										additionalItem={<ThemeSwitch />}
-										menuItems={dropdownItems}
-									>
+									<Dropdown additionalItem={<ThemeSwitch />} menuItems={dropdownItems}>
 										<div className="flex  space-x-0.5">
 											{session?.user?.image && (
 												<img
@@ -85,7 +75,7 @@ function NavItems() {
 		{ name: 'Pricing', to: '/pricing' },
 		{ name: 'About', to: '/about' },
 		{ name: 'Login', to: '/auth/login', showIfAuth: false },
-		{ name: 'App', to: '/app', showIfAuth: true },
+		{ name: 'Dashboard', to: '/dashboard', showIfAuth: true },
 	];
 
 	const [session] = useSession();
@@ -107,7 +97,7 @@ function NavItems() {
 					<Link
 						className={handleShow(showIfAuth)}
 						key={name}
-						to={to}
+						href={to}
 						active={pathname === to ? true : undefined}
 					>
 						{name}
@@ -115,7 +105,7 @@ function NavItems() {
 				))}
 				<Link
 					className="sm:hidden"
-					to="/account"
+					href="/account"
 					active={pathname === '/settings' ? true : undefined}
 				>
 					Settings

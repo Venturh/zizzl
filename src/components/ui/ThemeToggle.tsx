@@ -1,41 +1,9 @@
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import { Switch } from '@headlessui/react';
 import { useTheme } from 'next-themes';
-import { SunIcon, MoonIcon, EmojiHappyIcon } from '@heroicons/react/solid';
+import { Switch } from '@headlessui/react';
 
-import IconButton from './ui/IconButton';
-
-export function ThemeToggle() {
-	const [mounted, setMounted] = useState(false);
-	const { resolvedTheme, setTheme } = useTheme();
-	const [animate, setAnimate] = useState(false);
-
-	useEffect(() => setMounted(true), []);
-
-	function changeTheme() {
-		setTheme(resolvedTheme === 'light' ? 'dark' : 'light');
-		setAnimate(true);
-		setTimeout(() => {
-			setAnimate(false);
-		}, 1000);
-	}
-
-	return (
-		<IconButton ariaLabel="theme-toggle" onClick={() => changeTheme()}>
-			<span className="sr-only">Toggle Theme</span>
-			{!mounted ? (
-				<EmojiHappyIcon className="w-5" />
-			) : resolvedTheme === 'dark' ? (
-				<SunIcon className="w-5" />
-			) : (
-				<MoonIcon className="w-5" />
-			)}
-		</IconButton>
-	);
-}
-
-export function ThemeSwitch() {
+export default function ThemeSwitch() {
 	const [enabled, setEnabled] = useState(false);
 
 	const { resolvedTheme, setTheme } = useTheme();
