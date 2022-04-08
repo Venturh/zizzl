@@ -26,6 +26,7 @@ specifiers:
   eslint-config-prettier: ^8.4.0
   eslint-plugin-prettier: ^4.0.0
   graphql: ^15.5.1
+  graphql-scalars: ^1.17.0
   next: 12.0.8
   next-auth: ^4.2.0
   next-seo: ^4.26.0
@@ -84,6 +85,7 @@ devDependencies:
   eslint-config-next: 12.1.0_ad11c66a95ca2fccbafd49470ae9c8ba
   eslint-config-prettier: 8.5.0_eslint@8.12.0
   eslint-plugin-prettier: 4.0.0_f2c91d0f54113167d2bd9214a5ab5a36
+  graphql-scalars: 1.17.0_graphql@15.8.0
   postcss: 8.4.12
   prettier: 2.6.2
   prisma: 3.11.1
@@ -3874,7 +3876,6 @@ packages:
     dependencies:
       graphql: 15.8.0
       tslib: 2.3.1
-    dev: false
 
   /graphql-tag/2.12.6_graphql@15.8.0:
     resolution: {integrity: sha512-FdSNcu2QQcWnM2VNvSCCDCVS5PpPqpzgFT8+GXzqJuoDd0CBncxCY278u4mhRO7tMgo2JjgJA5aZ+nWSQ/Z+xg==}
