@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { NextAuthOptions } from 'next-auth';
 import { signIn } from 'next-auth/react';
-import { object, string } from 'yup';
+import z from 'zod';
 
 import LandingLayout from 'components/layouts/LandingLayout';
 import Form from 'components/ui/Form';
@@ -15,8 +15,8 @@ import { useMeQuery } from 'types/graphql';
 const title = 'Sign in';
 const description = 'Welcome back.';
 
-const loginSchema = object({
-	email: string().required().email(),
+const loginSchema = z.object({
+	email: z.string().nonempty().email(),
 });
 
 function Login({}: NextAuthOptions) {
