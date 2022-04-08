@@ -15,6 +15,7 @@ export interface FormProps<T extends FieldValues> extends Omit<ComponentProps<'f
 	onSubmit?: SubmitHandler<T>;
 	submitButtonText?: string;
 	headless?: boolean;
+	disabled?: boolean;
 }
 
 export default function Form<T extends FieldValues>({
@@ -26,6 +27,7 @@ export default function Form<T extends FieldValues>({
 	submitButtonText,
 	headless = false,
 	className,
+	disabled,
 	...rest
 }: FormProps<T>) {
 	const { isSubmitting } = form.formState;
@@ -38,7 +40,12 @@ export default function Form<T extends FieldValues>({
 						{children}
 					</fieldset>
 					{!headless && (
-						<Button className="w-full mt-4" type="submit" loading={isSubmitting}>
+						<Button
+							className="w-full mt-4"
+							type="submit"
+							disabled={disabled}
+							loading={isSubmitting}
+						>
 							{submitButtonText}
 						</Button>
 					)}

@@ -39,8 +39,15 @@ function Login({}: NextAuthOptions) {
 						submitButtonText="Login"
 						form={form}
 						onSubmit={({ email }) => signIn('email', { email })}
+						disabled={true}
 					>
-						<Input label="Email" type="email" autoComplete="email" {...form.register('email')} />
+						<Input
+							disabled
+							label="Email"
+							type="email"
+							autoComplete="email"
+							{...form.register('email')}
+						/>
 					</Form>
 
 					<div className="relative mt-6">
