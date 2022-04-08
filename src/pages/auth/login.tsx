@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { NextAuthOptions } from 'next-auth';
-import { signIn, useSession } from 'next-auth/client';
+import { signIn } from 'next-auth/react';
 import { object, string } from 'yup';
 
 import LandingLayout from 'components/layouts/LandingLayout';

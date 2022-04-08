@@ -1,0 +1,18 @@
+fragment PostFragment on Post {
+        id
+    title
+    text
+    createdAt
+    updatedAt
+}
+
+query posts{
+  posts {
+      ...PostFragment
+  }
+}
+query post($id: String!){
+  post(id: $id) {
+      ...PostFragment
+  }
+}

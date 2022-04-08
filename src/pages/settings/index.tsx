@@ -1,11 +1,11 @@
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import { object, string } from 'yup';
+import { object, string } from 'zod';
 
-import Form from 'components/Form';
+import Form from 'components/ui/Form';
 import FormInput from 'components/ui/Input';
 import AppLayout from 'components/layouts/AppLayout';
-import { ThemeSwitch } from 'components/ThemeToggle';
+import ThemeSwitch from 'components/ui/ThemeToggle';
 
 import { useFormValidation } from 'hooks/useForm';
 import { preloadQuery } from 'lib/apollo';
@@ -16,8 +16,8 @@ const imageRegex =
 	'^https?://(www.|)((a|p)bs.twimg.com/(profile_images|sticky/default_profile_images)/(.*).(jpg|png|jpeg|webp)|avatars.githubusercontent.com/u/[^s]+|github.com/identicons/[^s]+|cdn.discordapp.com/avatars/[^s]+/[^s]+.(jpg|png|jpeg|webp)|api.multiavatar.com)';
 
 export const editAccountSchema = object({
-	name: string().required().min(3),
-	image: string().required().matches(new RegExp(imageRegex)),
+	name: string().nonempty().min(3),
+	image: string().regex(new RegExp(imageRegex)).nonempty(),
 });
 
 export default function Account() {
@@ -40,7 +40,7 @@ export default function Account() {
 				<div className="space-y-4">
 					<h2 className="text-xl font-medium">Account</h2>
 					<Form
-						buttonText="Save"
+						submitButtonText="Save"
 						form={form}
 						onSubmit={({ name, image }) => submit({ variables: { name, image } })}
 						error={{ title: 'An error occurred', error }}

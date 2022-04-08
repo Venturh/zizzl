@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
-import { getSession, getCsrfToken } from 'next-auth/client';
+import { getSession, getCsrfToken } from 'next-auth/react';
 import { QueryOptions } from '@apollo/client';
 import { preloadQuery } from 'lib/apollo';
 

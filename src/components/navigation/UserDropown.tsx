@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { signOut } from 'next-auth/client';
+import { signOut } from 'next-auth/react';
 import { ComponentProps } from 'react';
 import { useMeQuery } from 'types/graphql';
 

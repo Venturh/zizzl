@@ -1,6 +1,6 @@
 overwrite: true
-schema: src/graphql/schema.gql
-documents: src/graphql/**/*.gql
+schema: src/types/schema.gql
+documents: src/lib/**/*.gql
 generates:
   src/types/graphql/index.ts:
     plugins:

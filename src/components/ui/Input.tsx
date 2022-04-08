@@ -31,7 +31,10 @@ export function Error({ name, padding }: { name?: string; padding?: boolean }) {
 }
 
 export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
-	({ label, type, trailingText, leadingText, inset = true, as = 'input', ...rest }, ref) => {
+	(
+		{ label, type = 'text', trailingText, leadingText, inset = true, as = 'input', ...rest },
+		ref,
+	) => {
 		const Tag = as;
 		const wrapperClass =
 			'w-full px-4 py-2 rounded-lg disabled:bg-opacity-20 focus-within:border-brand-primary focus-within:ring-brand-primary disabled:opacity-60 disabled:bg-accent-primary border border-accent-primary border bg-secondary text-primary';

@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app';
-import { Provider } from 'next-auth/client';
+import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
 import { ApolloProvider } from '@apollo/client';
 
@@ -10,13 +10,13 @@ import '../../public/globals.css';
 function MyApp({ Component, pageProps }: AppProps) {
 	const client = useApollo(pageProps.initialClientState);
 	return (
-		<Provider session={pageProps.session}>
+		<SessionProvider session={pageProps.session}>
 			<ApolloProvider client={client}>
 				<ThemeProvider attribute="class">
 					<Component {...pageProps} />
 				</ThemeProvider>
 			</ApolloProvider>
-		</Provider>
+		</SessionProvider>
 	);
 }
 export default MyApp;

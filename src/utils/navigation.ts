@@ -17,9 +17,9 @@ export type NavLink = {
 export function getNavLinks() {
 	return [
 		{
-			name: 'Dashboard',
-			description: 'Dashboard',
-			href: '/dashboard',
+			name: 'Posts',
+			description: 'All Posts',
+			href: '/posts',
 			icon: HomeIcon,
 			protected: true,
 		},

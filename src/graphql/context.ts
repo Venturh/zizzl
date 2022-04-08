@@ -1,22 +1,21 @@
-import { PrismaClient } from '@prisma/client';
-import { ApolloServer } from 'apollo-server-micro';
-import { getSession } from 'next-auth/client';
-import { MicroRequest } from 'apollo-server-micro/dist/types';
+import { NextApiRequest } from 'next';
+import { Session } from 'next-auth';
+import { getSession } from 'next-auth/react';
 
-import prisma from 'lib/prisma';
 import { SessionUser } from 'types/next-auth';
 
 export interface Context {
-	prisma: PrismaClient;
 	user?: SessionUser;
+	userId?: string;
+	session?: Session;
 }
 
-const context = async ({ req }: { req: MicroRequest }): Promise<Context> => {
+export default async function getContext({ req }: { req: NextApiRequest }): Promise<Context> {
 	const session = await getSession({ req });
-	return {
-		prisma,
-		user: session?.user,
-	};
-};
 
-export default context;
+	return {
+		user: session?.user,
+		userId: session?.user?.id,
+		session,
+	};
+}

@@ -1,24 +1,13 @@
-import { extendType, nullable, objectType, stringArg } from 'nexus';
-import { User } from 'nexus-prisma';
+import { extendType, nullable, stringArg } from 'nexus';
 
-import { ResultType } from './ResultResolver';
+import db from 'lib/prisma';
+import { ResultType } from '../results';
 
-export const user = objectType({
-	name: User.$name,
-	definition(t) {
-		t.field(User.id);
-		t.field(User.name);
-		t.field(User.email);
-		t.field(User.image);
-	},
-});
-
-export const queries = extendType({
+export const userQueries = extendType({
 	type: 'Query',
 	definition(t) {
 		t.nullable.field('me', {
 			type: 'User',
-			//@ts-ignore
 			resolve(_, __, { user }) {
 				return user;
 			},
@@ -35,8 +24,8 @@ export const userMutations = extendType({
 				name: nullable(stringArg()),
 				image: nullable(stringArg()),
 			},
-			resolve: async (_root, { name, image }, { user, prisma }) => {
-				await prisma.user.update({
+			resolve: async (_root, { name, image }, { user }) => {
+				await db.user.update({
 					where: { id: user!.id },
 					data: {
 						name: name ?? undefined,
