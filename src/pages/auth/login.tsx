@@ -63,7 +63,7 @@ function Login({}: NextAuthOptions) {
 						<Button
 							className="w-full"
 							variant="outline"
-							onClick={() => signIn('github', { callbackUrl: '/portfolio' })}
+							onClick={() => signIn('github', { callbackUrl: '/' })}
 						>
 							<div className="inline-flex space-x-4">
 								<svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
@@ -75,7 +75,7 @@ function Login({}: NextAuthOptions) {
 						<Button
 							className="w-full"
 							variant="outline"
-							onClick={() => signIn('discord', { callbackUrl: '/portfolio' })}
+							onClick={() => signIn('discord', { callbackUrl: '/' })}
 						>
 							<div className="inline-flex space-x-4">
 								<svg

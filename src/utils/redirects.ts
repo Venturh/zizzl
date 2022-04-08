@@ -3,10 +3,7 @@ import { getSession, getCsrfToken } from 'next-auth/react';
 import { QueryOptions } from '@apollo/client';
 import { preloadQuery } from 'lib/apollo';
 
-export async function unauthenticatedRoute(
-	ctx: GetServerSidePropsContext,
-	redirect: string = '/portfolio',
-) {
+export async function unauthenticatedRoute(ctx: GetServerSidePropsContext, redirect: string = '/') {
 	const session = await getSession(ctx);
 	const csrfToken = await getCsrfToken(ctx);
 
