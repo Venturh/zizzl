@@ -26,6 +26,7 @@ specifiers:
   eslint-config-prettier: ^8.4.0
   eslint-plugin-prettier: ^4.0.0
   graphql: ^15.5.1
+  graphql-helix: ^1.12.0
   graphql-scalars: ^1.17.0
   next: 12.0.8
   next-auth: ^4.2.0
@@ -57,6 +58,7 @@ dependencies:
   clsx: 1.1.1
   dayjs: 1.11.0
   graphql: 15.8.0
+  graphql-helix: 1.12.0_graphql@15.8.0
   next: 12.0.8_react-dom@17.0.2+react@17.0.2
   next-auth: 4.3.1_react-dom@17.0.2+react@17.0.2
   next-seo: 4.29.0_227e7fb4dbd28186517209bc65f02635
@@ -3853,6 +3855,14 @@ packages:
       graphql: 15.8.0
     transitivePeerDependencies:
       - encoding
+    dev: false
+
+  /graphql-helix/1.12.0_graphql@15.8.0:
+    resolution: {integrity: sha512-wTu1m/ZFBCgzLPCg/dHO4cNy9JR5Sq/3RqDVblqrU3b/Yem7EXZtQMzG045tHqkCdbgcgQl+kIkXDur1yLfdtw==}
+    peerDependencies:
+      graphql: ^15.3.0 || ^16.0.0
+    dependencies:
+      graphql: 15.8.0
     dev: false
 
   /graphql-request/3.7.0_graphql@15.8.0:

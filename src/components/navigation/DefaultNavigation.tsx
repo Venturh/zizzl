@@ -7,7 +7,7 @@ import UserDropdown from './UserDropown';
 import Button from 'components/ui/Button';
 
 import { useMeQuery } from 'types/graphql';
-import { getNavLinks } from 'utils/navigation';
+import { filteredNavLinks, getNavLinks } from 'utils/navigation';
 import Logo from 'components/ui/Logo';
 import Link from 'next/link';
 
@@ -40,7 +40,7 @@ export default function DefaultNavigation() {
 								</div>
 								<div className="hidden sm:block sm:ml-6">
 									<div className="flex space-x-4">
-										{navlinks.map((link) => {
+										{filteredNavLinks(navlinks, Boolean(data?.me)).map((link) => {
 											return (
 												<Link href={link.href} key={link!.name}>
 													<a
